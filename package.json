@@ -1,0 +1,26 @@
+{
+  "name": "airbnc",
+  "version": "1.0.0",
+  "description": "This project is a simple relational database modeled after Airbnb, using seeding as the primary method for populating tables. It simulates the backend data structure of a property rental platform. The seeded sample data supports testing, development, and demonstration purposes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node ./db/connections/seed-run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myhzyy/Airbnc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myhzyy/Airbnc/issues"
+  },
+  "homepage": "https://github.com/myhzyy/Airbnc#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "pg": "^8.15.6",
+    "pg-format": "^1.0.4"
+  }
+}

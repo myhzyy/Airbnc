@@ -1,15 +1,27 @@
-const { propertiesData } = require("../data/test");
+function formatProperties(propertiesData, usersData) {
+  const userIdMap = {};
 
-function formatProperties(propertiesData) {
-  return propertiesData.map(
-    ({ name, location, property_type, price_per_night, description }) => [
-      name,
-      location,
-      property_type,
-      price_per_night,
-      description,
-    ]
-  );
+  usersData.forEach((user) => {
+    const fullName = `${user.first_name} ${user.surname}`;
+    userIdMap[fullName] = user.user_id;
+  });
+
+  const formattedProperties = propertiesData.map((property) => {
+    const hostId = userIdMap[property.host_name];
+
+    const result = [
+      hostId,
+      property.name,
+      property.location,
+      property.property_type,
+      property.price_per_night,
+      property.description,
+    ];
+
+    return result;
+  });
+
+  return formattedProperties;
 }
 
-console.log(formatProperties(propertiesData));
+module.exports = formatProperties;

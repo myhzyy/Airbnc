@@ -21,7 +21,10 @@ const {
   insertProperty,
 } = require("../queries/createPropertiesTable");
 
-const { createReviewsTable } = require("../queries/createReviewsTable");
+const {
+  createReviewsTable,
+  insertReviews,
+} = require("../queries/createReviewsTable");
 
 async function seed(
   propertyTypesData,
@@ -58,39 +61,15 @@ async function seed(
   );
   await insertProperty(propertiesData, usersTableRes);
 
-  //////  //////  //////  //////  //////  //////
+  //// REVIEW TABLE
 
-  await db.query(`CREATE TABLE reviews (
-        review_id SERIAL PRIMARY KEY,
-        property_id INT NOT NULL REFERENCES properties(property_id),
-        guest_id INT NOT NULL REFERENCES users(user_id),
-        rating INT NULL,
-        comment TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`);
+  await createReviewsTable();
 
-  const propertiesRes = await db.query(
+  const propertiesTableRes = await db.query(
     "SELECT property_id, name FROM properties"
   );
-  const propertiesResRows = propertiesRes.rows;
-  const userResRows = usersTableRes.rows;
 
-  const formattedReview = formatReviews(
-    propertiesResRows,
-    userResRows,
-    reviewsData,
-    console.log,
-    true
-  );
-
-  await db.query(
-    format(
-      `INSERT INTO reviews (
-        property_id, guest_id, rating, comment
-    ) VALUES %L`,
-      formattedReview
-    )
-  );
+  await insertReviews(propertiesTableRes, usersTableRes, reviewsData);
 
   //////  //////  //////  //////  //////
 
@@ -123,6 +102,8 @@ async function seed(
       formattedFavourites
     )
   );
+
+  ///////  ///////  ///////  ///////  ///////  ///////
 
   await db.query(`CREATE TABLE images (
     image_id SERIAL PRIMARY KEY,

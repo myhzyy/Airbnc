@@ -3,7 +3,7 @@ function formatReviews(
   userResRows,
   reviewsData,
   logger = console.log,
-  silent = false
+  silent = true
 ) {
   const propertyIdMap = {};
   const userIdMap = {};

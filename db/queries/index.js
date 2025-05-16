@@ -16,4 +16,7 @@ module.exports = {
 
   // Images
   ...require("./createImages"),
+
+  // Amenities
+  ...require("./createAmenities.js"),
 };

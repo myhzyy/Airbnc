@@ -1,4 +1,5 @@
 const seed = require("./seed");
+
 const {
   propertyTypesData,
   usersData,
@@ -6,7 +7,6 @@ const {
   reviewsData,
   favouritesData,
   imagesData,
-  amenities,
 } = require("../data/test");
 
 seed(
@@ -15,6 +15,5 @@ seed(
   propertiesData,
   reviewsData,
   favouritesData,
-  imagesData,
-  amenities
+  imagesData
 );

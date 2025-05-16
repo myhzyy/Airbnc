@@ -13,6 +13,8 @@ const {
   insertFavourites,
   createImagesTable,
   insertImages,
+  createAmenitiesTable,
+  insertAmenities,
 } = require("../queries");
 
 const dropTables = require("../utils/dropTables");
@@ -23,8 +25,7 @@ async function seed(
   propertiesData,
   reviewsData,
   favouritesData,
-  imagesData,
-  amenities
+  imagesData
 ) {
   ///  DROP ALL TABLES TABLES
 
@@ -69,6 +70,14 @@ async function seed(
   await createImagesTable();
 
   await insertImages(imagesData, propertiesTableRes);
+
+  //// AMENITIES TABLE
+
+  await createAmenitiesTable();
+
+  await insertAmenities(propertiesData);
+
+  //// PROPERTIES_AMENITIES TABLE
 }
 
 module.exports = seed;

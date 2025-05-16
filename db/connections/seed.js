@@ -15,6 +15,8 @@ const {
   insertImagesTable,
 } = require("../queries");
 
+const dropTables = require("../utils/dropTables");
+
 async function seed(
   propertyTypesData,
   usersData,
@@ -24,25 +26,21 @@ async function seed(
   imagesData,
   amenities
 ) {
-  await db.query(`DROP TABLE IF EXISTS amenities;`);
-  await db.query(`DROP TABLE IF EXISTS images;`);
-  await db.query(`DROP TABLE IF EXISTS favourites;`);
-  await db.query(`DROP TABLE IF EXISTS reviews;`);
-  await db.query(`DROP TABLE IF EXISTS properties;`);
-  await db.query(`DROP TABLE IF EXISTS users;`);
-  await db.query(`DROP TABLE IF EXISTS property_types;`);
+  ///  DROP ALL TABLES TABLES
 
-  ///  PROPERTYTYPES TABLE ✅
+  await dropTables();
+
+  ///  PROPERTYTYPES TABLE
 
   await createPropertyTypesTable();
   await insertPropertyTypes(propertyTypesData);
 
-  /// USERS TABLE ✅
+  /// USERS TABLE
 
   await createUsersTable();
   await insertUsers(usersData);
 
-  //// PROPERTY TABLE ✅
+  //// PROPERTY TABLE
 
   await createPropertyTable();
   const usersTableRes = await db.query(
@@ -50,7 +48,7 @@ async function seed(
   );
   await insertProperty(propertiesData, usersTableRes);
 
-  //// REVIEW TABLE ✅
+  //// REVIEW TABLE
 
   await createReviewsTable();
 
@@ -60,13 +58,13 @@ async function seed(
 
   await insertReviews(propertiesTableRes, usersTableRes, reviewsData);
 
-  //// FAVOURITES TABLE ✅
+  //// FAVOURITES TABLE
 
   await createFavouritesTable();
 
   await insertFavourites(favouritesData, usersTableRes, propertiesTableRes);
 
-  //// FAVOURITES IMAGES TABLE ✅
+  //// FAVOURITES IMAGES TABLE
 
   await createImages();
 

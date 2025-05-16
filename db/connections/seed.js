@@ -6,6 +6,22 @@ const formatProperties = require("../utils/formatProperties");
 const formatReviews = require("../utils/formatReviews");
 const formatFavourites = require("../utils/formatFavourites");
 const formatImages = require("../utils/formatImages");
+const {
+  createPropertyTypesTable,
+  insertPropertyTypes,
+} = require("../queries/createPropertyTypesTable");
+
+const {
+  createUsersTable,
+  insertUsersTable,
+} = require("../queries/createUsersTable");
+
+const {
+  createPropertyTable,
+  insertProperty,
+} = require("../queries/createPropertiesTable");
+
+const { createReviewsTable } = require("../queries/createReviewsTable");
 
 async function seed(
   propertyTypesData,
@@ -24,59 +40,25 @@ async function seed(
   await db.query(`DROP TABLE IF EXISTS users;`);
   await db.query(`DROP TABLE IF EXISTS property_types;`);
 
-  await db.query(`CREATE TABLE property_types (
-    property_type VARCHAR NOT NULL PRIMARY KEY,
-    description TEXT NOT NULL
-  )`);
+  ///  PROPERTYTYPES TABLE
 
-  const formattedData = formatPropertyTypes(propertyTypesData);
+  await createPropertyTypesTable();
+  await insertPropertyTypes(propertyTypesData);
 
-  await db.query(
-    format(
-      `INSERT INTO property_types (property_type, description) VALUES %L `,
-      formattedData
-    )
+  /// USERS TABLE
+
+  await createUsersTable();
+  await insertUsersTable(usersData);
+
+  //// PROPERTY TABLE
+
+  await createPropertyTable();
+  const usersTableRes = await db.query(
+    "SELECT user_id, first_name, surname FROM users"
   );
+  await insertProperty(propertiesData, usersTableRes);
 
-  await db.query(`CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20),
-    is_host BOOLEAN NOT NULL,
-    avatar VARCHAR,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )`);
-
-  const formattedUsers = formatUsers(usersData);
-
-  await db.query(
-    format(
-      `INSERT INTO users (first_name, surname, email, phone_number, is_host, avatar) VALUES %L`,
-      formattedUsers
-    )
-  );
-
-  await db.query(`CREATE TABLE properties (
-    property_id SERIAL PRIMARY KEY,
-    host_id INT NOT NULL REFERENCES users(user_id),
-    name VARCHAR NOT NULL,
-    location VARCHAR NOT NULL,
-    property_type VARCHAR NOT NULL REFERENCES property_types(property_type),
-    price_per_night DECIMAL(10,2) NOT NULL,
-    description TEXT
-    )`);
-
-  const res = await db.query("SELECT user_id, first_name, surname FROM users");
-  const formattedProperties = formatProperties(propertiesData, res.rows);
-
-  await db.query(
-    format(
-      `INSERT INTO properties (host_id, name, location, property_type, price_per_night, description) VALUES %L`,
-      formattedProperties
-    )
-  );
+  //////  //////  //////  //////  //////  //////
 
   await db.query(`CREATE TABLE reviews (
         review_id SERIAL PRIMARY KEY,
@@ -91,7 +73,7 @@ async function seed(
     "SELECT property_id, name FROM properties"
   );
   const propertiesResRows = propertiesRes.rows;
-  const userResRows = res.rows;
+  const userResRows = usersTableRes.rows;
 
   const formattedReview = formatReviews(
     propertiesResRows,
@@ -109,6 +91,8 @@ async function seed(
       formattedReview
     )
   );
+
+  //////  //////  //////  //////  //////
 
   await db.query(`CREATE TABLE favourites(
       favourite_id SERIAL PRIMARY KEY,

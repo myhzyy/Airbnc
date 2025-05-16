@@ -2,7 +2,7 @@ const db = require("../connections/dbConnectionPool");
 const format = require("pg-format");
 const formatImages = require("../utils/formatImages");
 
-async function createImages() {
+async function createImagesTable() {
   await db.query(`CREATE TABLE images (
         image_id SERIAL PRIMARY KEY,
         property_id INT NOT NULL,
@@ -11,7 +11,7 @@ async function createImages() {
       )`);
 }
 
-async function insertImagesTable(imagesData, propertiesTableRes) {
+async function insertImages(imagesData, propertiesTableRes) {
   const propertiesTableResRows = propertiesTableRes.rows;
 
   const formattedImages = formatImages(imagesData, propertiesTableResRows);
@@ -26,4 +26,4 @@ async function insertImagesTable(imagesData, propertiesTableRes) {
   );
 }
 
-module.exports = { createImages, insertImagesTable };
+module.exports = { createImagesTable, insertImages };

@@ -11,8 +11,8 @@ const {
   insertReviews,
   createFavouritesTable,
   insertFavourites,
-  createImages,
-  insertImagesTable,
+  createImagesTable,
+  insertImages,
 } = require("../queries");
 
 const dropTables = require("../utils/dropTables");
@@ -66,9 +66,9 @@ async function seed(
 
   //// FAVOURITES IMAGES TABLE
 
-  await createImages();
+  await createImagesTable();
 
-  await insertImagesTable(imagesData, propertiesTableRes);
+  await insertImages(imagesData, propertiesTableRes);
 }
 
 module.exports = seed;

@@ -13,11 +13,14 @@ async function createReviewsTable() {
       )`);
 }
 
-async function insertReviews(reviewData, propertyTableResRows, usersTableRes) {
+async function insertReviews(propertiesTableRes, usersTableRes, reviewsData) {
+  const propertiesTableResRows = propertiesTableRes.rows;
+  const usersTableResRows = usersTableRes.rows;
+
   const formattedReview = formatReview(
-    reviewData,
-    propertyTableResRows,
-    usersTableRes
+    propertiesTableResRows,
+    usersTableResRows,
+    reviewsData
   );
 
   await db.query(

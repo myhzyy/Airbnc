@@ -26,6 +26,16 @@ const {
   insertReviews,
 } = require("../queries/createReviewsTable");
 
+const {
+  createFavouritesTable,
+  insertFavouritesTable,
+} = require("../queries/createFavourites");
+
+const {
+  createImagesTable,
+  insertImagesTable,
+} = require("../queries/createImages");
+
 async function seed(
   propertyTypesData,
   usersData,
@@ -43,17 +53,17 @@ async function seed(
   await db.query(`DROP TABLE IF EXISTS users;`);
   await db.query(`DROP TABLE IF EXISTS property_types;`);
 
-  ///  PROPERTYTYPES TABLE
+  ///  PROPERTYTYPES TABLE ✅
 
   await createPropertyTypesTable();
   await insertPropertyTypes(propertyTypesData);
 
-  /// USERS TABLE
+  /// USERS TABLE ✅
 
   await createUsersTable();
   await insertUsersTable(usersData);
 
-  //// PROPERTY TABLE
+  //// PROPERTY TABLE ✅
 
   await createPropertyTable();
   const usersTableRes = await db.query(
@@ -61,7 +71,7 @@ async function seed(
   );
   await insertProperty(propertiesData, usersTableRes);
 
-  //// REVIEW TABLE
+  //// REVIEW TABLE ✅
 
   await createReviewsTable();
 
@@ -71,63 +81,21 @@ async function seed(
 
   await insertReviews(propertiesTableRes, usersTableRes, reviewsData);
 
-  //////  //////  //////  //////  //////
+  //// FAVOURITES TABLE ✅
 
-  await db.query(`CREATE TABLE favourites(
-      favourite_id SERIAL PRIMARY KEY,
-      guest_id INT NOT NULL REFERENCES users(user_id),
-      property_id INT NOT NULL REFERENCES properties(property_id)
-  )`);
+  await createFavouritesTable();
 
-  const userIdDbData = await db.query(
-    "SELECT user_id, first_name, surname FROM users"
-  );
-  const userIdDbDataRows = userIdDbData.rows;
-
-  const propertiesDbData = await db.query(
-    "SELECT property_id, name FROM properties"
-  );
-  const propertiesDbDataRows = propertiesDbData.rows;
-
-  const formattedFavourites = formatFavourites(
+  await insertFavouritesTable(
     favouritesData,
-    userIdDbDataRows,
-    propertiesDbDataRows
+    usersTableRes,
+    propertiesTableRes
   );
 
-  await db.query(
-    format(
-      `INSERT INTO favourites (
-      guest_id, property_id) VALUES %L`,
-      formattedFavourites
-    )
-  );
+  //// FAVOURITES IMAGES TABLE ✅
 
-  ///////  ///////  ///////  ///////  ///////  ///////
+  await createImagesTable();
 
-  await db.query(`CREATE TABLE images (
-    image_id SERIAL PRIMARY KEY,
-    property_id INT NOT NULL,
-    image_url VARCHAR NOT NULL,
-    alt_text VARCHAR NOT NULL
-  )`);
-
-  const formattedImages = formatImages(imagesData, propertiesDbDataRows);
-
-  await db.query(
-    format(
-      `INSERT INTO images (
-    property_id, image_url, alt_text
-  ) VALUES %L`,
-      formattedImages
-    )
-  );
-
-  /// CREATE AMENITIES
-
-  // await db.query(`CREATE TABLE amenities (
-  //   amenities VARCHAR PRIMARY KEY
-  // )`);
+  await insertImagesTable(imagesData, propertiesTableRes);
 }
 
 module.exports = seed;

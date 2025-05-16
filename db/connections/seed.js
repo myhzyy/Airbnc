@@ -1,40 +1,19 @@
 const db = require("./dbConnectionPool");
-const format = require("pg-format");
-const formatPropertyTypes = require("../utils/formatPropertyTypes");
-const formatUsers = require("../utils/formatUsers");
-const formatProperties = require("../utils/formatProperties");
-const formatReviews = require("../utils/formatReviews");
-const formatFavourites = require("../utils/formatFavourites");
-const formatImages = require("../utils/formatImages");
+
 const {
   createPropertyTypesTable,
   insertPropertyTypes,
-} = require("../queries/createPropertyTypesTable");
-
-const {
   createUsersTable,
-  insertUsersTable,
-} = require("../queries/createUsersTable");
-
-const {
+  insertUsers,
   createPropertyTable,
   insertProperty,
-} = require("../queries/createPropertiesTable");
-
-const {
   createReviewsTable,
   insertReviews,
-} = require("../queries/createReviewsTable");
-
-const {
   createFavouritesTable,
-  insertFavouritesTable,
-} = require("../queries/createFavourites");
-
-const {
-  createImagesTable,
+  insertFavourites,
+  createImages,
   insertImagesTable,
-} = require("../queries/createImages");
+} = require("../queries");
 
 async function seed(
   propertyTypesData,
@@ -61,7 +40,7 @@ async function seed(
   /// USERS TABLE ✅
 
   await createUsersTable();
-  await insertUsersTable(usersData);
+  await insertUsers(usersData);
 
   //// PROPERTY TABLE ✅
 
@@ -85,15 +64,11 @@ async function seed(
 
   await createFavouritesTable();
 
-  await insertFavouritesTable(
-    favouritesData,
-    usersTableRes,
-    propertiesTableRes
-  );
+  await insertFavourites(favouritesData, usersTableRes, propertiesTableRes);
 
   //// FAVOURITES IMAGES TABLE ✅
 
-  await createImagesTable();
+  await createImages();
 
   await insertImagesTable(imagesData, propertiesTableRes);
 }

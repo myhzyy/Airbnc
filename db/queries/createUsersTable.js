@@ -15,7 +15,7 @@ async function createUsersTable() {
       )`);
 }
 
-async function insertUsersTable(usersData) {
+async function insertUsers(usersData) {
   const formattedUsers = formatUsers(usersData);
 
   await db.query(
@@ -26,4 +26,4 @@ async function insertUsersTable(usersData) {
   );
 }
 
-module.exports = { createUsersTable, insertUsersTable };
+module.exports = { createUsersTable, insertUsers };

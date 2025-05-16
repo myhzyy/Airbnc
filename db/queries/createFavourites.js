@@ -10,7 +10,7 @@ async function createFavouritesTable() {
     )`);
 }
 
-async function insertFavouritesTable(
+async function insertFavourites(
   favouritesData,
   usersTableRes,
   propertiesTableRes
@@ -33,4 +33,4 @@ async function insertFavouritesTable(
   );
 }
 
-module.exports = { createFavouritesTable, insertFavouritesTable };
+module.exports = { createFavouritesTable, insertFavourites };

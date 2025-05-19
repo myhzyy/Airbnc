@@ -99,7 +99,3 @@ async function seed(
 }
 
 module.exports = seed;
-
-/// make lookup object
-/// match the property name with the amrnties from
-/// properties

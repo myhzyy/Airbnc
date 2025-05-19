@@ -19,4 +19,10 @@ module.exports = {
 
   // Amenities
   ...require("./createAmenities.js"),
+
+  // Properties_amenities
+  ...require("./createPropertiesAmenities.js"),
+
+  // Bookings
+  ...require("./createBookings.js"),
 };

@@ -15,6 +15,10 @@ const {
   insertImages,
   createAmenitiesTable,
   insertAmenities,
+  createPropertiesAmenities,
+  insertPropertiesAmenities,
+  createBookingsTable,
+  insertBookingsTable,
 } = require("../queries");
 
 const dropTables = require("../utils/dropTables");
@@ -25,7 +29,8 @@ async function seed(
   propertiesData,
   reviewsData,
   favouritesData,
-  imagesData
+  imagesData,
+  bookingsData
 ) {
   ///  DROP ALL TABLES TABLES
 
@@ -78,6 +83,23 @@ async function seed(
   await insertAmenities(propertiesData);
 
   //// PROPERTIES_AMENITIES TABLE
+
+  await createPropertiesAmenities();
+
+  const propIdRes = await db.query("SELECT property_id, name from properties");
+  const ameneitesSlug = await db.query("SELECT * from amenities");
+
+  await insertPropertiesAmenities(propIdRes, propertiesData);
+
+  //// BOOKINGS TABLE
+
+  await createBookingsTable();
+
+  await insertBookingsTable(propertiesTableRes, bookingsData, usersTableRes);
 }
 
 module.exports = seed;
+
+/// make lookup object
+/// match the property name with the amrnties from
+/// properties

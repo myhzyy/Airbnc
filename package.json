@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./db/connections/seed-run.js"
+    "seed": "node ./db/connections/seed-run.js",
+    "test-app": "node app.js",
+    "jest": "npx jest properties.test.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,9 @@
   "homepage": "https://github.com/myhzyy/Airbnc#readme",
   "dependencies": {
     "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "pg": "^8.15.6",
-    "pg-format": "^1.0.4"
+    "pg-format": "^1.0.4",
+    "supertest": "^7.1.1"
   }
 }

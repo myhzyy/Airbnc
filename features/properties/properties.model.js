@@ -15,3 +15,12 @@ exports.fetchProperties = async (req, res, next) => {
 
   return rows;
 };
+
+exports.getPropertiesById = async (id) => {
+  const {
+    rows: [properties],
+  } = await db.query("SELECT * FROM properties WHERE properties_id = $1", [id]);
+  return properties;
+};
+
+/// makes the query

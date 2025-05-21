@@ -7,7 +7,7 @@ afterAll(async () => {
   await db.end();
 });
 
-describe("app", () => {
+describe("properties test", () => {
   test("a get request to our database", async () => {
     await request(app).get("/api/properties").expect(200);
   });

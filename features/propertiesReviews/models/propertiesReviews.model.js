@@ -1,4 +1,4 @@
-const db = require("../../db/connections/dbConnectionPool");
+const db = require("../../../db/connections/dbConnectionPool");
 
 exports.fetchReviewsByPropertyId = async (property_id) => {
   const reviewsQuery = `

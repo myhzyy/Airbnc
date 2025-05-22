@@ -1,4 +1,4 @@
-const db = require("../../db/connections/dbConnectionPool");
+const db = require("../../../db/connections/dbConnectionPool");
 
 exports.fetchProperties = async (req, res, next) => {
   const query = `

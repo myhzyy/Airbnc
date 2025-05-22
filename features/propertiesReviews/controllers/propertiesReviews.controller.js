@@ -1,4 +1,6 @@
-const { fetchReviewsByPropertyId } = require("./propertiesReviews.model");
+const {
+  fetchReviewsByPropertyId,
+} = require("../models/propertiesReviews.model");
 
 exports.getReviewsByPropertyId = async (req, res, next) => {
   try {

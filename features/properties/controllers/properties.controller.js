@@ -1,4 +1,7 @@
-const { fetchProperties, fetchPropertyQueries } = require("./properties.model");
+const {
+  fetchProperties,
+  fetchPropertyQueries,
+} = require("../models/properties.model");
 
 exports.getProperties = async (req, res, next) => {
   try {

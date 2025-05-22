@@ -8,7 +8,7 @@ afterAll(async () => {
 });
 
 describe("properties test", () => {
-  test("a get request to our database", async () => {
+  test("a get request to our database returns 200", async () => {
     await request(app).get("/api/properties").expect(200);
   });
 

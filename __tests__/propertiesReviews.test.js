@@ -7,25 +7,81 @@ afterAll(async () => {
 });
 
 describe("reviews test", () => {
-  test("a get request returns a 200 status code", async () => {
-    await request(app).get("/api/reviews").expect(200);
+  test("GET /api/properties/:id/reviews responds with reviews and average_rating", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
   });
 
-  test("a get request to /api/reviews responds with an array", async () => {
-    const { body } = await request(app).get("/api/reviews").expect(200);
+  test("GET /api/properties/:id/reviews responds with an array", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
+
     expect(Array.isArray(body.reviews)).toBe(true);
-    expect(body.reviews.length > 0).toBe(true);
   });
 
-  //   test("a get request returns an object with the correct keys assigned", async () => {
-  //     const { body } = await request(app).get("/api/properties");
+  test("GET /api/properties/:id/reviews returns review objects with the correct keys", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
 
-  //     body.properties.forEach((properties) => {
-  //       expect(properties.hasOwnProperty("property_id")).toBe(true);
-  //       expect(properties.hasOwnProperty("property_name")).toBe(true);
-  //       expect(properties.hasOwnProperty("location")).toBe(true);
-  //       expect(properties.hasOwnProperty("price_per_night")).toBe(true);
-  //       expect(properties.hasOwnProperty("host")).toBe(true);
-  //     });
-  //   });
+    body.reviews.forEach((review) => {
+      expect(review.hasOwnProperty("review_id")).toBe(true);
+      expect(review.hasOwnProperty("comment")).toBe(true);
+      expect(review.hasOwnProperty("rating")).toBe(true);
+      expect(review.hasOwnProperty("created_at")).toBe(true);
+      expect(review.hasOwnProperty("guest")).toBe(true);
+      expect(review.hasOwnProperty("guest_avatar")).toBe(true);
+    });
+  });
+
+  test("GET /api/properties/:id/reviews returns reviews with correct shape", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
+
+    body.reviews.forEach((review) => {
+      expect(review).toEqual(
+        expect.objectContaining({
+          review_id: expect.any(Number),
+          comment: expect.any(String),
+          rating: expect.any(Number),
+          created_at: expect.any(String),
+          guest: expect.any(String),
+          guest_avatar: expect.any(String),
+        })
+      );
+    });
+  });
+
+  test("average_rating is a numeric string", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
+
+    expect(typeof body.average_rating).toBe("string");
+    expect(!isNaN(parseFloat(body.average_rating))).toBe(true);
+  });
+
+  test("GET /api/properties/:id/reviews returns reviews sorted by created_at descending", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/1/reviews")
+      .expect(200);
+
+    const timestamps = body.reviews.map((r) =>
+      new Date(r.created_at).getTime()
+    );
+    const sorted = [...timestamps].sort((a, b) => b - a);
+    expect(timestamps).toEqual(sorted);
+  });
+
+  test("GET /api/properties/:id/reviews returns empty reviews and null average_rating if none exist", async () => {
+    const { body } = await request(app)
+      .get("/api/properties/999/reviews")
+      .expect(200);
+
+    expect(body.reviews).toEqual([]);
+    expect(body.average_rating).toBe(null);
+  });
 });

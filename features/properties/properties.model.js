@@ -12,15 +12,5 @@ exports.fetchProperties = async (req, res, next) => {
   JOIN users ON users.user_id = properties.host_id;`;
 
   const { rows } = await db.query(query);
-
   return rows;
 };
-
-exports.getPropertiesById = async (id) => {
-  const {
-    rows: [properties],
-  } = await db.query("SELECT * FROM properties WHERE properties_id = $1", [id]);
-  return properties;
-};
-
-/// makes the query

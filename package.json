@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./db/connections/seed-run.js",
     "test-app": "node app.js",
-    "jest": "npx jest properties.test.js"
+    "jest": "npx jest"
   },
   "repository": {
     "type": "git",

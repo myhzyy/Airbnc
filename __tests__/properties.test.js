@@ -70,4 +70,20 @@ describe("properties test", () => {
       expect(body.properties).toContainEqual(expectedProperties);
     });
   });
+
+  test("a get request returns the correct shape", async () => {
+    const { body } = await request(app).get("/api/properties");
+
+    body.properties.forEach((properties) => {
+      expect(properties).toEqual(
+        expect.objectContaining({
+          property_id: expect.any(Number),
+          property_name: expect.any(String),
+          location: expect.any(String),
+          price_per_night: expect.any(String),
+          host: expect.any(String),
+        })
+      );
+    });
+  });
 });

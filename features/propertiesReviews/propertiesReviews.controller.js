@@ -1,6 +1,9 @@
-const { fetchReviews } = require("./propertiesReviews.model");
+const { fetchReviewsByPropertyId } = require("./propertiesReviews.model");
 
-exports.getReviews = async (req, res, next) => {
-  const reviews = await fetchReviews();
-  res.status(200).send({ reviews });
+exports.getReviewsByPropertyId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { rows, average_rating } = await fetchReviewsByPropertyId(id);
+    res.status(200).send({ reviews: rows, average_rating });
+  } catch (err) {}
 };

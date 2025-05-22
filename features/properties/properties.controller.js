@@ -1,16 +1,10 @@
-const { fetchProperties, getPropertiesById } = require("./properties.model");
+const { fetchProperties, fetchPropertyQueries } = require("./properties.model");
 
 exports.getProperties = async (req, res, next) => {
-  const properties = await fetchProperties();
-  res.status(200).send({ properties });
+  try {
+    const properties = await fetchProperties(req.query);
+    res.status(200).send({ properties });
+  } catch (err) {
+    next(err);
+  }
 };
-
-exports.getPropertiesById = async (req, res, next) => {
-  const { id } = req.params;
-
-  const properties = await getPropertiesById(id);
-
-  res.status(200).send({ properties });
-};
-
-/// sends the res to postman

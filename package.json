@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./db/connections/seed-run.js",
     "test-app": "node app.js",
-    "jest": "npx jest features/propertiesId/propertyId.test.js"
+    "dev": "nodemon app.js",
+    "jest": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,8 @@
     "pg": "^8.15.6",
     "pg-format": "^1.0.4",
     "supertest": "^7.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

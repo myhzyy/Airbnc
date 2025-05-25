@@ -1,7 +1,7 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("../../app");
 
-const db = require("../db/connections/dbConnectionPool");
+const db = require("../../db/connections/dbConnectionPool");
 
 afterAll(async () => {
   await db.end();
@@ -56,13 +56,7 @@ describe("properties test", () => {
         location: "London, UK",
         price_per_night: "120.00",
         host: "Alice Johnson",
-      },
-      {
-        property_id: 2,
-        property_name: "Cosy Family House",
-        location: "Manchester, UK",
-        price_per_night: "150.00",
-        host: "Alice Johnson",
+        favourite_count: "1",
       },
     ];
 

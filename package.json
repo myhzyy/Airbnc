@@ -8,7 +8,8 @@
     "seed": "node ./db/connections/seed-run.js",
     "test-app": "node app.js",
     "dev": "nodemon app.js",
-    "jest": "npx jest"
+    "jest": "npx jest",
+    "test-jest": "npx jest features/properties/postProperties.test.js"
   },
   "repository": {
     "type": "git",

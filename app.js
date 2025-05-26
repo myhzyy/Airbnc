@@ -1,4 +1,7 @@
 const express = require("express");
+const app = express();
+
+app.use(express.json());
 
 const {
   getProperties,
@@ -16,16 +19,18 @@ const {
   getUsersId,
 } = require("./features/users/getUsersId/controller/getUsersid.controller");
 
-const { handlePathNotFound } = require("./features/errors/errors");
+const {
+  postReviews,
+} = require("./features/properties/controllers/postProperties.controller");
 
-const app = express();
+const { handlePathNotFound } = require("./features/errors/errors");
 
 app.get("/api/properties", getProperties); /// DONE ✅
 app.get("/api/properties/:id/reviews", getReviewsByPropertyId); /// DONE ✅
 app.get("/api/properties/:id", getPropertyId); /// DONE ✅
 app.get("/api/users/:id", getUsersId); /// DONE ✅
 
-// app.post("/api/properties/:id/reviews", postReviews);
+app.post("/api/properties/:id/reviews", postReviews);
 
 app.all("*invalid-path", handlePathNotFound); /// TO FIX
 

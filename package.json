@@ -9,7 +9,7 @@
     "test-app": "node app.js",
     "dev": "nodemon app.js",
     "jest": "npx jest",
-    "test-jest": "npx jest features/properties/postProperties.test.js"
+    "test-jest": "npx jest features/propertiesReviews/deleteProperties.test.js"
   },
   "repository": {
     "type": "git",

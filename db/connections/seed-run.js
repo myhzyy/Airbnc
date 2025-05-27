@@ -10,12 +10,15 @@ const {
   bookingsData,
 } = require("../data/test");
 
-seed(
-  propertyTypesData,
-  usersData,
-  propertiesData,
-  reviewsData,
-  favouritesData,
-  imagesData,
-  bookingsData
-);
+const runSeed = () =>
+  seed(
+    propertyTypesData,
+    usersData,
+    propertiesData,
+    reviewsData,
+    favouritesData,
+    imagesData,
+    bookingsData
+  );
+
+module.exports = runSeed;

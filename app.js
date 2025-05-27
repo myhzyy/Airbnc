@@ -23,14 +23,19 @@ const {
   postReviews,
 } = require("./features/properties/controllers/postProperties.controller");
 
+const {
+  deleteReview,
+} = require("./features/propertiesReviews/controllers/deleteReviews.controller");
+
 const { handlePathNotFound } = require("./features/errors/errors");
 
 app.get("/api/properties", getProperties); /// DONE ✅
 app.get("/api/properties/:id/reviews", getReviewsByPropertyId); /// DONE ✅
 app.get("/api/properties/:id", getPropertyId); /// DONE ✅
 app.get("/api/users/:id", getUsersId); /// DONE ✅
+app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
 
-app.post("/api/properties/:id/reviews", postReviews);
+app.delete("/api/properties/:id/reviews", deleteReview);
 
 app.all("*invalid-path", handlePathNotFound); /// TO FIX
 

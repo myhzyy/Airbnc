@@ -25,4 +25,15 @@ describe("DELETE /api/properties/:id/reviews", () => {
     expect(res.body.deleted.length).toBeGreaterThan(0);
     expect(res.body.deleted[0]).toHaveProperty("review_id");
   });
+
+  test("DELETE /api/properties/:id/reviews returns 400 if no reviews exist for that property", async () => {
+    const res = await request(app)
+      .delete("/api/properties/9999/reviews")
+      .expect(400);
+
+    expect(res.body).toHaveProperty(
+      "msg",
+      "No reviews found for the given property_id"
+    );
+  });
 });

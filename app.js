@@ -39,6 +39,11 @@ app.delete("/api/properties/:id/reviews", deleteReview);
 
 app.all("*invalid-path", handlePathNotFound); /// TO FIX
 
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  res.status(status).send({ msg: err.message || "Internal Server Error" });
+});
+
 if (require.main === module) {
   app.listen(9090, () => {
     console.log("Server listening on port 9090");

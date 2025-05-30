@@ -42,7 +42,7 @@ POST - FAVOURITE ✅
 DELETE - FAVOURITE ✅
 GET - PROPERTIES (IMAGE)
 
--------------------------- SATURDAY
+-------------------------- TODO - 9 LEFT
 
 GET - SINGLE PROPERTY (IMAGES)
 

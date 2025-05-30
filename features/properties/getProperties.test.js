@@ -62,6 +62,7 @@ describe("properties test", () => {
         price_per_night: "120.00",
         host: "Alice Johnson",
         favourite_count: "1",
+        image: "https://example.com/images/modern_apartment_1.jpg",
       },
     ];
 

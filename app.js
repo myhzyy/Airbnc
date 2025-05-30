@@ -49,7 +49,6 @@ app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
 app.delete("/api/properties/:id/reviews", deleteReview); /// DONE ✅
 app.patch("/api/users/:id", patchUserId); /// DONE ✅
 app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
-
 app.delete("/api/properties/:id/favourite", deleteFavourite);
 
 app.all("*invalid-path", handlePathNotFound);

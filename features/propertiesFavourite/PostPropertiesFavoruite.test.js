@@ -3,12 +3,12 @@ const app = require("../../app");
 const db = require("../../db/connections/dbConnectionPool");
 const seed = require("../../db/connections/seed-run");
 
-beforeEach(async () => {
-  await seed(); // Reset DB before each test
+afterAll(async () => {
+  await db.end();
 });
 
-afterAll(async () => {
-  await db.end(); // Close DB connection after tests
+beforeEach(async () => {
+  await seed();
 });
 
 describe("POST /api/properties/:id/favourite", () => {

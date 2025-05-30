@@ -1,6 +1,11 @@
 const request = require("supertest");
 const app = require("../../app");
 const db = require("../../db/connections/dbConnectionPool");
+const seed = require("../../db/connections/seed-run");
+
+beforeEach(async () => {
+  await seed();
+});
 
 afterAll(async () => {
   await db.end();

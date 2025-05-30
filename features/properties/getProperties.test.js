@@ -1,10 +1,15 @@
 const request = require("supertest");
 const app = require("../../app");
-
 const db = require("../../db/connections/dbConnectionPool");
+
+const seed = require("../../db/connections/seed-run");
 
 afterAll(async () => {
   await db.end();
+});
+
+beforeEach(async () => {
+  await seed();
 });
 
 describe("properties test", () => {

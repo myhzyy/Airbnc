@@ -4,12 +4,11 @@
   "description": "This project is a simple relational database modeled after Airbnb, using seeding as the primary method for populating tables. It simulates the backend data structure of a property rental platform. The seeded sample data supports testing, development, and demonstration purposes.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./db/connections/seed-run.js",
     "test-app": "node app.js",
     "dev": "nodemon app.js",
-    "jest": "npx jest",
-    "test-jest": "npx jest features/propertiesFavourite/deletePropertiesFavourite.test.js"
+    "test": "jest --runInBand",
+    "test-jest": "npx jest features/propertiesReviews/propertiesReviews.test.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +29,7 @@
     "supertest": "^7.1.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
   }
 }

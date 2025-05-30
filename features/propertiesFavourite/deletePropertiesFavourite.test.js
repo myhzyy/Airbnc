@@ -2,12 +2,13 @@ const request = require("supertest");
 const app = require("../../app");
 const db = require("../../db/connections/dbConnectionPool");
 const seed = require("../../db/connections/seed-run");
-beforeEach(async () => {
-  await seed(); // Reset DB before each test
-});
 
 afterAll(async () => {
-  await db.end(); // Close DB connection after tests
+  await db.end();
+});
+
+beforeEach(async () => {
+  await seed();
 });
 
 describe("DELETE /api/properties/:id/favourite", () => {

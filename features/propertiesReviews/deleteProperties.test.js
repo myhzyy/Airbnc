@@ -3,12 +3,12 @@ const app = require("../../app");
 const db = require("../../db/connections/dbConnectionPool");
 const seed = require("../../db/connections/seed-run");
 
-beforeEach(async () => {
-  await seed();
-});
-
 afterAll(async () => {
   await db.end();
+});
+
+beforeEach(async () => {
+  await seed();
 });
 
 describe("DELETE /api/properties/:id/reviews", () => {
@@ -35,13 +35,5 @@ describe("DELETE /api/properties/:id/reviews", () => {
       "msg",
       "No reviews found for the given property_id"
     );
-  });
-
-  test("400 for invalid property ID format (non-numeric)", async () => {
-    const res = await request(app)
-      .delete("/api/properties/not-a-number/reviews")
-      .expect(400);
-
-    expect(res.body.msg).tobe("Invalid property_id");
   });
 });

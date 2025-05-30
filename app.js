@@ -27,6 +27,18 @@ const {
   deleteReview,
 } = require("./features/propertiesReviews/controllers/deleteReviews.controller");
 
+const {
+  patchUserId,
+} = require("./features/users/getUsersId/controller/patchUserId.controller");
+
+const {
+  postFavourite,
+} = require("./features/propertiesFavourite/controller/postPropertiesFavourite.controller");
+
+const {
+  deleteFavourite,
+} = require("./features/propertiesFavourite/controller/deletePropertiesFavourite.controller");
+
 const { handlePathNotFound } = require("./features/errors/errors");
 
 app.get("/api/properties", getProperties); /// DONE ✅
@@ -34,14 +46,20 @@ app.get("/api/properties/:id/reviews", getReviewsByPropertyId); /// DONE ✅
 app.get("/api/properties/:id", getPropertyId); /// DONE ✅
 app.get("/api/users/:id", getUsersId); /// DONE ✅
 app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
+app.delete("/api/properties/:id/reviews", deleteReview); /// DONE ✅
+app.patch("/api/users/:id", patchUserId); /// DONE ✅
+app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
 
-app.delete("/api/properties/:id/reviews", deleteReview);
+app.delete("/api/properties/:id/favourite", deleteFavourite);
 
-app.all("*invalid-path", handlePathNotFound); /// TO FIX
+app.all("*invalid-path", handlePathNotFound);
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;
-  res.status(status).send({ msg: err.message || "Internal Server Error" });
+
+  res
+    .status(status)
+    .send({ msg: err.message || "Internal Server Error or path not found" });
 });
 
 if (require.main === module) {

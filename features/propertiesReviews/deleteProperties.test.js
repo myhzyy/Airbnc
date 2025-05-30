@@ -36,4 +36,12 @@ describe("DELETE /api/properties/:id/reviews", () => {
       "No reviews found for the given property_id"
     );
   });
+
+  test("400 for invalid property ID format (non-numeric)", async () => {
+    const res = await request(app)
+      .delete("/api/properties/not-a-number/reviews")
+      .expect(400);
+
+    expect(res.body.msg).tobe("Invalid property_id");
+  });
 });

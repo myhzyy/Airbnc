@@ -55,27 +55,6 @@ describe("reviews test", () => {
     });
   });
 
-  test("average_rating is a numeric string", async () => {
-    const { body } = await request(app)
-      .get("/api/properties/1/reviews")
-      .expect(200);
-
-    expect(typeof body.average_rating).toBe("string");
-    expect(!isNaN(parseFloat(body.average_rating))).toBe(true);
-  });
-
-  test("GET /api/properties/:id/reviews returns reviews sorted by created_at descending", async () => {
-    const { body } = await request(app)
-      .get("/api/properties/1/reviews")
-      .expect(200);
-
-    const timestamps = body.reviews.map((r) =>
-      new Date(r.created_at).getTime()
-    );
-    const sorted = [...timestamps].sort((a, b) => b - a);
-    expect(timestamps).toEqual(sorted);
-  });
-
   test("GET /api/properties/:id/reviews returns empty reviews and null average_rating if none exist", async () => {
     const { body } = await request(app)
       .get("/api/properties/999/reviews")

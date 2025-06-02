@@ -39,6 +39,14 @@ const {
   deleteFavourite,
 } = require("./features/propertiesFavourite/controller/deletePropertiesFavourite.controller");
 
+const {
+  getAmenities,
+} = require("./features/amenities/controller/amenities.controller");
+
+const {
+  getBookings,
+} = require("./features/bookings/controller/bookings.controller");
+
 const { handlePathNotFound } = require("./features/errors/errors");
 
 app.get("/api/properties", getProperties); /// DONE ✅
@@ -49,7 +57,10 @@ app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
 app.delete("/api/properties/:id/reviews", deleteReview); /// DONE ✅
 app.patch("/api/users/:id", patchUserId); /// DONE ✅
 app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
-app.delete("/api/properties/:id/favourite", deleteFavourite);
+app.delete("/api/properties/:id/favourite", deleteFavourite); /// DONE ✅
+app.get("/api/properties/:id/bookings", getBookings); /// DONE ✅
+
+app.get("/api/amenities", getAmenities); /// TODO
 
 app.all("*invalid-path", handlePathNotFound);
 

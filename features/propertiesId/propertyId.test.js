@@ -86,4 +86,27 @@ describe("PropertiesID tests", () => {
 
     expect(body.propertyId).toEqual(expect.objectContaining(expected));
   });
+
+  test("returns property data including image URLs array", async () => {
+    const res = await request(app).get("/api/properties/1").expect(200);
+
+    const property = res.body.propertyId;
+
+    expect(property).toHaveProperty("property_id", 1);
+    expect(property).toHaveProperty("property_name");
+    expect(property).toHaveProperty("location");
+    expect(property).toHaveProperty("price_per_night");
+    expect(property).toHaveProperty("description");
+    expect(property).toHaveProperty("host");
+    expect(property).toHaveProperty("host_avatar");
+    expect(property).toHaveProperty("favourite_count");
+
+    expect(property).toHaveProperty("images");
+    expect(Array.isArray(property.images)).toBe(true);
+    expect(property.images.length).toBeGreaterThan(0);
+
+    property.images.forEach((url) => {
+      expect(typeof url).toBe("string");
+    });
+  });
 });

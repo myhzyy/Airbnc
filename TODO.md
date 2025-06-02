@@ -40,7 +40,16 @@ NICE TO HAVE
 
 POST - FAVOURITE ✅
 DELETE - FAVOURITE ✅
-GET - PROPERTIES (IMAGE)
+GET - PROPERTIES (IMAGE) ✅
+
+-------------------------- MONDAY
+
+GET - AMENITIES ✅
+
+-------------------------- TUESDAY
+
+GET - properties (amenity query)
+GET - Amenities
 
 -------------------------- TODO - 9 LEFT
 

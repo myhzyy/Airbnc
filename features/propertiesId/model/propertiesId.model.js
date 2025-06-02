@@ -19,8 +19,16 @@ exports.fetchPropertyId = async (property_id, user_id) => {
   `;
 
   const { rows } = await db.query(query, [property_id]);
-
   const propertyData = rows[0];
+
+  const imgRes = await db.query(
+    `
+  SELECT image_url FROM images WHERE property_id = $1 
+  ORDER BY image_id ASC`,
+    [property_id]
+  );
+
+  const imageUrls = imgRes.rows.map((row) => row.image_url);
 
   if (user_id) {
     const favRes = await db.query(
@@ -28,8 +36,12 @@ exports.fetchPropertyId = async (property_id, user_id) => {
       [user_id, property_id]
     );
 
-    return { ...propertyData, favourited: favRes.rows.length > 0 };
+    return {
+      ...propertyData,
+      favourited: favRes.rows.length > 0,
+      images: imageUrls,
+    };
   }
 
-  return propertyData;
+  return { ...propertyData, images: imageUrls };
 };

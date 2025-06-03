@@ -86,4 +86,24 @@ describe("properties test", () => {
       );
     });
   });
+
+  test("GET /api/properties?amenity returns only properties with that specified amenity (e.g WIFI)", async () => {
+    const { body } = await request(app)
+      .get("/api/properties?amenity=WIFI")
+      .expect(200);
+
+    body.properties.forEach((property) => {
+      expect(property).toEqual(
+        expect.objectContaining({
+          property_id: expect.any(Number),
+          property_name: expect.any(String),
+          location: expect.any(String),
+          price_per_night: expect.any(String),
+          host: expect.any(String),
+          favourite_count: expect.any(String),
+          image: expect.any(String),
+        })
+      );
+    });
+  });
 });

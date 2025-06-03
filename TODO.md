@@ -48,7 +48,14 @@ GET - AMENITIES ✅
 
 -------------------------- TUESDAY
 
-GET - properties (amenity query)
+BOOKINGS SORT
+GET - properties (amenity query) ✅
+TEST - properties (amenity query) ✅
+EXPLAIN CODE
+LECTURE
+
+-------------------------- WEDNESDAY
+
 GET - Amenities
 
 -------------------------- TODO - 9 LEFT

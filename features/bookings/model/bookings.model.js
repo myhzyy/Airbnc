@@ -2,6 +2,10 @@ const format = require("pg-format");
 const db = require("../../../db/connections/dbConnectionPool");
 
 exports.fetchBookings = async (property_id) => {
+  if (isNaN(property_id)) {
+    throw { status: 404, message: "PropertyId is not a valid number" };
+  }
+
   const propertiesQuery = format(
     `
     SELECT

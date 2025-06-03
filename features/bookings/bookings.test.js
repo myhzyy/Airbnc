@@ -46,4 +46,12 @@ describe("GET /api/properties/:id/bookings", () => {
     const res = await request(app).get("/api/properties/999/bookings");
     expect(res.body.msg).toBe("PropertyId not found");
   });
+
+  test("responds with 400 for invalid property ID format", async () => {
+    const res = await request(app)
+      .get("/api/properties/not-a-number/bookings")
+      .expect(404);
+
+    expect(res.body.msg).toBe("PropertyId is not a valid number");
+  });
 });

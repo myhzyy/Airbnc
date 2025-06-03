@@ -2,7 +2,29 @@ const format = require("pg-format");
 const db = require("../../../db/connections/dbConnectionPool");
 
 exports.fetchProperties = async (queryParams) => {
-  const { maxprice, minprice, sort, order, host } = queryParams;
+  const { maxprice, minprice, sort, order, host, amenity } = queryParams;
+
+  let propertyId = null;
+
+  if (amenity) {
+    const amenitiesQuery = format(
+      `
+      SELECT 
+      property_id
+      FROM 
+      properties_amenities
+      WHERE amenity_slug = %L;
+      `,
+      amenity
+    );
+
+    const amenitiesDBQuery = await db.query(amenitiesQuery);
+    propertyId = amenitiesDBQuery.rows.map((row) => row.property_id);
+
+    if (propertyId.length === 0) {
+      return [];
+    }
+  }
 
   let query = `
     SELECT 
@@ -47,6 +69,16 @@ exports.fetchProperties = async (queryParams) => {
         ? " AND properties.host_id = %L"
         : " WHERE properties.host_id = %L",
       host
+    );
+    whereAdded = true;
+  }
+
+  if (propertyId) {
+    query += format(
+      whereAdded
+        ? " AND properties.property_id IN (%L)"
+        : " WHERE properties.property_id IN (%L)",
+      propertyId
     );
     whereAdded = true;
   }

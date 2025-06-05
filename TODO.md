@@ -51,12 +51,23 @@ GET - AMENITIES ✅
 BOOKINGS SORT
 GET - properties (amenity query) ✅
 TEST - properties (amenity query) ✅
-EXPLAIN CODE
-LECTURE
+EXPLAIN CODE ✅
+LECTURE ✅
+AMENITIES TEST ✅
+
+UPDATE PROPERTY REVIEW PATH
+DELETE FAVOURITE
+SORT IMPORTS
 
 -------------------------- WEDNESDAY
 
-GET - Amenities
+GET - Amenities ✅
+DELETE REVIEWS TEST ✅
+
+-------------------------- THURSDAY
+
+DELETE - FAVOURITE
+UPLOAD DATABASE TO SUPABASE
 
 -------------------------- TODO - 9 LEFT
 

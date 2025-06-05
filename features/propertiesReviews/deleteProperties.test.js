@@ -13,27 +13,27 @@ beforeEach(async () => {
 
 describe("DELETE /api/properties/:id/reviews", () => {
   test("204 No Content on successful deletion", async () => {
-    const log = await request(app)
-      .delete("/api/properties/9/reviews")
-      .expect(200);
+    await request(app).delete("/api/reviews/1").expect(204);
   });
 
-  test("DELETE /api/properties/1/reviews deletes from table and returns deleted object", async () => {
-    const res = await request(app).delete("/api/properties/3/reviews");
-    expect(res.body).toHaveProperty("deleted");
-    expect(Array.isArray(res.body.deleted)).toBe(true);
-    expect(res.body.deleted.length).toBeGreaterThan(0);
-    expect(res.body.deleted[0]).toHaveProperty("review_id");
+  test("Returns 404 if review does not exist", async () => {
+    const res = await request(app).delete("/api/reviews/9999").expect(404);
+
+    expect(res.body).toHaveProperty("msg", "Review not found");
   });
 
-  test("DELETE /api/properties/:id/reviews returns 400 if no reviews exist for that property", async () => {
+  test("Actually deletes the review from the table", async () => {
+    await request(app).delete("/api/reviews/2").expect(204);
+
+    const res = await request(app).delete("/api/reviews/2").expect(404);
+    expect(res.body).toHaveProperty("msg", "Review not found");
+  });
+
+  test("400 if review_id is not a number", async () => {
     const res = await request(app)
-      .delete("/api/properties/9999/reviews")
+      .delete("/api/reviews/not-a-number")
       .expect(400);
 
-    expect(res.body).toHaveProperty(
-      "msg",
-      "No reviews found for the given property_id"
-    );
+    expect(res.body).toHaveProperty("msg", "Invalid review_id");
   });
 });

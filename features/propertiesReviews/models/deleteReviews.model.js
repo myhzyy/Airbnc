@@ -1,20 +1,17 @@
 const db = require("../../../db/connections/dbConnectionPool");
 const format = require("pg-format");
 
-exports.deletePropertyReview = async (property_id) => {
-  const { rows } = await db.query(
-    `
-  SELECT * from reviews WHERE property_id = $1`,
-    [property_id]
+exports.deletePropertyReview = async (review_id) => {
+  const result = await db.query(
+    `DELETE FROM reviews WHERE review_id = $1 RETURNING *;`,
+    [review_id]
   );
 
-  if (rows.length === 0) {
-    const err = new Error("No reviews found for the given property_id");
-    err.status = 400;
-    throw err;
+  if (result.rowCount === 0) {
+    const error = new Error("Review not found");
+    error.status = 404;
+    throw error;
   }
 
-  await db.query("DELETE from reviews WHERE property_id = $1", [property_id]);
-
-  return rows;
+  return result.rows[0];
 };

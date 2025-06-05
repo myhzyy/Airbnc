@@ -7,5 +7,9 @@ exports.fetchAmenities = async () => {
 
   const { rows } = await db.query(query);
 
-  console.log(rows);
+  const formatted = rows.map((row) => {
+    return { amenity_slug: row.amenity };
+  });
+
+  return formatted;
 };

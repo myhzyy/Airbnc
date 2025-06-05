@@ -54,13 +54,13 @@ app.get("/api/properties/:id/reviews", getReviewsByPropertyId); /// DONE ✅
 app.get("/api/properties/:id", getPropertyId); /// DONE ✅
 app.get("/api/users/:id", getUsersId); /// DONE ✅
 app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
-app.delete("/api/properties/:id/reviews", deleteReview); /// DONE ✅
 app.patch("/api/users/:id", patchUserId); /// DONE ✅
 app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
 app.delete("/api/properties/:id/favourite", deleteFavourite); /// DONE ✅
 app.get("/api/properties/:id/bookings", getBookings); /// DONE ✅
+app.get("/api/amenities", getAmenities); /// DONE ✅
 
-app.get("/api/amenities", getAmenities); /// TODO
+app.delete("/api/reviews/:id", deleteReview);
 
 app.all("*invalid-path", handlePathNotFound);
 

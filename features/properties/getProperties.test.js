@@ -106,4 +106,23 @@ describe("properties test", () => {
       );
     });
   });
+
+  test("returns an empty array if no properties match the given amenity", async () => {
+    const { body } = await request(app)
+      .get("/api/properties?amenity=Helipad")
+      .expect(200);
+    expect(body.properties).toEqual([]);
+  });
+
+  test("returns only properties that have the specified amenity (e.g. WiFi)", async () => {
+    const { body } = await request(app)
+      .get("/api/properties?amenity=WiFi")
+      .expect(200);
+
+    const expectedIds = [1, 2, 3, 5, 6, 8, 9, 10, 11];
+
+    body.properties.forEach((property) => {
+      expect(expectedIds).toContain(property.property_id);
+    });
+  });
 });

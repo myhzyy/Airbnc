@@ -8,7 +8,7 @@
     "test-app": "node app.js",
     "dev": "nodemon app.js",
     "test": "jest --runInBand",
-    "test-jest": "npx jest features/properties/getProperties.test.js"
+    "test-jest": "npx jest features/propertiesReviews/deleteProperties.test.js"
   },
   "repository": {
     "type": "git",

@@ -3,15 +3,11 @@ const {
 } = require("../model/deletePropertiesFavourite.model");
 
 exports.deleteFavourite = async (req, res, next) => {
-  const { id } = req.params;
-
-  if (typeof id === "number") {
-    console.log("hi");
-  }
+  const { id, user_id } = req.params;
 
   try {
-    const deletedFavourite = await deletePropertyFavourite(id);
-    res.sendStatus(200);
+    await deletePropertyFavourite(id, user_id);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

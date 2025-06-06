@@ -1,35 +1,43 @@
 const db = require("../../../db/connections/dbConnectionPool");
 const format = require("pg-format");
 
-exports.deletePropertyFavourite = async (property_id) => {
-  const number = Number(property_id);
+exports.deletePropertyFavourite = async (id, user_id) => {
+  const propertyId = Number(id);
+  const userId = Number(user_id);
 
-  if (Number.isNaN(number)) {
-    throw {
-      status: 400,
-      message: "SENT body was NOT a valid. Try using a number.",
-    };
+  if (Number.isNaN(propertyId) || Number.isNaN(userId)) {
+    throw { status: 400, message: "Invalid property_id or user_id" };
   }
 
-  const propertiesQuery = format(
+  const favouriteQuery = format(
     `
-  SELECT * 
-  from PROPERTIES 
-  WHERE property_id = %L;`,
-    property_id
+    SELECT
+  *
+  FROM favourites
+  WHERE property_id = %L AND favourite_id = %L;
+  `,
+    propertyId,
+    userId
   );
 
-  const propertyRes = await db.query(propertiesQuery);
+  const favouriteQueryRows = await db.query(favouriteQuery);
 
-  if (propertyRes.rows.length === 0) {
+  if (favouriteQueryRows.rows.length < 1) {
     throw { status: 404, message: "Favourite not found" };
   }
-
   const query = format(
-    `DELETE FROM favourites WHERE property_id = %L RETURNING *;`,
-    property_id
+    `
+  DELETE FROM 
+  favourites 
+  WHERE property_id = %L 
+  AND guest_id = %L
+  RETURNING *;
+  `,
+    propertyId,
+    userId
   );
 
   const { rows } = await db.query(query);
+
   return rows;
 };

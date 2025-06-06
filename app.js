@@ -56,12 +56,11 @@ app.get("/api/users/:id", getUsersId); /// DONE ✅
 app.post("/api/properties/:id/reviews", postReviews); /// DONE ✅
 app.patch("/api/users/:id", patchUserId); /// DONE ✅
 app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
-app.delete("/api/properties/:id/favourite", deleteFavourite); /// DONE ✅
 app.get("/api/properties/:id/bookings", getBookings); /// DONE ✅
 app.get("/api/amenities", getAmenities); /// DONE ✅
+app.delete("/api/reviews/:id", deleteReview); /// DONE ✅
 
-app.delete("/api/reviews/:id", deleteReview);
-
+app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite); /// DONE ✅
 app.all("*invalid-path", handlePathNotFound);
 
 app.use((err, req, res, next) => {

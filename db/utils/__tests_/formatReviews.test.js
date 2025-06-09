@@ -1,7 +1,7 @@
 const formatReviews = require("../formatReviews");
 
 describe("formatReviews", () => {
-  test("calls logger with propertyIdMap", () => {
+  test("returns propertyIdMap when silent is false", () => {
     const mockProps = [
       { property_id: 1, name: "Modern Apartment in City Center" },
       { property_id: 2, name: "Cosy Family House" },
@@ -12,14 +12,11 @@ describe("formatReviews", () => {
       "Cosy Family House": 2,
     };
 
-    const mockLogger = jest.fn();
-
-    formatReviews(mockProps, [], [], mockLogger);
-
-    expect(mockLogger).toHaveBeenCalledWith(expectedMap);
+    const result = formatReviews(mockProps, [], [], false);
+    expect(result.propertyIdMap).toEqual(expectedMap);
   });
 
-  test("calls logger with userIdMap", () => {
+  test("returns userIdMap when silent is false", () => {
     const mockUsers = [
       { user_id: 1, first_name: "Alice", surname: "Johnson" },
       { user_id: 2, first_name: "Bob", surname: "Smith" },
@@ -27,11 +24,8 @@ describe("formatReviews", () => {
 
     const expectedMap = { "Alice Johnson": 1, "Bob Smith": 2 };
 
-    const mockLogger = jest.fn();
-
-    formatReviews([], mockUsers, [], mockLogger);
-
-    expect(mockLogger.mock.calls[1][0]).toEqual(expectedMap);
+    const result = formatReviews([], mockUsers, [], false);
+    expect(result.userIdMap).toEqual(expectedMap);
   });
 
   test("returns formatted reviews", () => {
@@ -65,15 +59,7 @@ describe("formatReviews", () => {
       [2, 202, 4, "Great for families"],
     ];
 
-    const mockLogger = jest.fn();
-
-    const result = formatReviews(
-      mockProps,
-      mockUsers,
-      mockReviews,
-      mockLogger,
-      true
-    );
+    const result = formatReviews(mockProps, mockUsers, mockReviews);
 
     expect(result).toEqual(expected);
   });

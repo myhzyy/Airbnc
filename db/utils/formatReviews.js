@@ -2,7 +2,6 @@ function formatReviews(
   propertiesResRows,
   userResRows,
   reviewsData,
-  logger = console.log,
   silent = true
 ) {
   const propertyIdMap = {};
@@ -25,8 +24,7 @@ function formatReviews(
   });
 
   if (!silent) {
-    logger(propertyIdMap);
-    logger(userIdMap);
+    return { formattedReviews, propertyIdMap, userIdMap };
   }
 
   return formattedReviews;

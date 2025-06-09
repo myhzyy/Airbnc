@@ -2,13 +2,15 @@
   "name": "airbnc",
   "version": "1.0.0",
   "description": "This project is a simple relational database modeled after Airbnb, using seeding as the primary method for populating tables. It simulates the backend data structure of a property rental platform. The seeded sample data supports testing, development, and demonstration purposes.",
-  "main": "index.js",
+  "main": "listen.js",
   "scripts": {
     "seed": "node ./db/connections/seed-run.js",
     "test-app": "node app.js",
     "dev": "nodemon app.js",
     "test": "jest --runInBand",
-    "test-jest": "npx jest features/propertiesFavourite/deletePropertiesFavourite.test.js"
+    "test-jest": "npx jest features/propertiesFavourite/deletePropertiesFavourite.test.js",
+    "start": "node listen.js",
+    "seed-prod": "NODE_ENV=production npm run seed"
   },
   "repository": {
     "type": "git",

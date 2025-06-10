@@ -73,6 +73,10 @@ DELETE - FAVOURITE TESTING ✅
 
 FINISH FINAL TEST ✅
 
+-------------------------- MONDAY
+
+FINISH BACKEND SUPERBASE
+
 -------------------------- BACKEND LEFT TO DO
 
 FIX format reviews ✅

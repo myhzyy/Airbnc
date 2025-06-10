@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+}
+
+.page-flex-container {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid blue;
+}
+
+h1 {
+  font-size: 45px;
+  opacity: 75%;
+}
+
+h2 {
+  font-weight: lighter;
+}
+
+.endpoint-header {
+  font-size: large;
+  font-weight: 800;
+}
+
+/* ENDPOINTS SECITON */
+
+.endpoints-section {
+  border: 2px solid pink;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.available-endpoints-column,
+.endpoint-infomation {
+  border: 1px solid black;
+  width: 50%;
+  padding: 1rem;
+  text-align: left;
+}
+
+.available-endpoints-column {
+  list-style: none;
+}
+
+span {
+  color: blue;
+}

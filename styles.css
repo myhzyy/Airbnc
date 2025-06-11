@@ -14,7 +14,8 @@ body {
   flex-direction: column;
   margin: 0 auto;
   text-align: center;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
+  padding: 20px;
 }
 
 h1 {
@@ -26,15 +27,38 @@ h2 {
   font-weight: lighter;
 }
 
+h3 {
+  margin-top: 10px;
+  font-size: 30px;
+}
+
 .endpoint-header {
   font-size: large;
   font-weight: 800;
 }
 
+.endpoints-columns {
+  width: 500px;
+  margin: 0 auto;
+  padding-top: 50px;
+  /* margin-top: 50px; */
+  /* border: 2px solid red; */
+  display: flex;
+  font-size: larger;
+  font-weight: bolder;
+  justify-content: space-between;
+}
+
+h2,
+.endpoint-header,
+.endpoints-section {
+  margin: 30px;
+}
+
 /* ENDPOINTS SECITON */
 
 .endpoints-section {
-  border: 2px solid pink;
+  /* border: 2px solid pink; */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -42,7 +66,7 @@ h2 {
 
 .available-endpoints-column,
 .endpoint-infomation {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 50%;
   padding: 1rem;
   text-align: left;
@@ -54,4 +78,22 @@ h2 {
 
 span {
   color: blue;
+}
+
+.get-requests {
+  padding-top: 30px;
+  text-align: left;
+  margin: 0 auto;
+  width: 700px;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.patch-requests {
+  padding-top: 30px;
+  text-align: left;
+  margin: 0 auto;
+  width: 700px;
+  font-weight: bolder;
+  font-size: 25px;
 }

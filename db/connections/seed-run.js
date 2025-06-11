@@ -8,17 +8,14 @@ const {
   favouritesData,
   imagesData,
   bookingsData,
-} = require("../data/test");
+} = require("../data/dev");
 
-const runSeed = () =>
-  seed(
-    propertyTypesData,
-    usersData,
-    propertiesData,
-    reviewsData,
-    favouritesData,
-    imagesData,
-    bookingsData
-  );
-
-module.exports = runSeed;
+seed(
+  propertyTypesData,
+  usersData,
+  propertiesData,
+  reviewsData,
+  favouritesData,
+  imagesData,
+  bookingsData
+);

@@ -29,25 +29,42 @@
 
       <p class="endpoint-header">Below is a list of available endpoints and how to use them:</p>
 
-      
-
       <h3>Try them now!</h3>
 
-      <h3>Endpoints</h3>
 
+          <div class="endpoints-columns">
+            <p>ENDPOINTS</p>
+            <p>EXAMPLE RESPONSE</p>
+          </div>
+
+          <P class="get-requests">GET REQUESTS</P>
 
             <div class="endpoints-section">
                 <div class="available-endpoints-column"> 
-                    <li> <span>GET</span>/api/properties - View all properties</li>
-                    <li> <span>GET</span>/api/users - View all users</li>
+
+
+                    <li> <span>GET</span>/api/properties</li>
+                    <li> <span>GET</span>/api/users</li>
+                    <li> <span>GET</span>/api/users/:id</li>
+                    <li> <span>GET</span>/api/properties/:id/reviews</li>
+                    <li> <span>GET</span>/api/properties/:id</li>
+
+
                 </div>
 
                 <div class="endpoint-infomation">
-                    <p>hello</p>
+                    <p> Get all properties</p>
+                    <p> Get all users</p>
+                    <p> Get the user details with a specific ID</p>
+                    <p> Get the review of specific user ID</p>
+                    <p> Get the property with a specific ID</p>
+                    
                 </div>
-
-
             </div>
+
+
+            <P class="patch-requests">PATCH REQUESTS</P>
+
     </div>
   </body>
 </html>

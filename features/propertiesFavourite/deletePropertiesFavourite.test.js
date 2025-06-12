@@ -1,14 +1,32 @@
 const request = require("supertest");
 const app = require("../../app");
 const db = require("../../db/connections/dbConnectionPool");
-const seed = require("../../db/connections/seed-run");
+
+const seed = require("../../db/connections/seed");
+const {
+  propertyTypesData,
+  usersData,
+  propertiesData,
+  reviewsData,
+  favouritesData,
+  imagesData,
+  bookingsData,
+} = require("../../db/data/test");
 
 afterAll(async () => {
   await db.end();
 });
 
 beforeEach(async () => {
-  await seed();
+  await seed(
+    propertyTypesData,
+    usersData,
+    propertiesData,
+    reviewsData,
+    favouritesData,
+    imagesData,
+    bookingsData
+  );
 });
 
 describe("DELETE /api/properties/:id/users/:user_id/favourite", () => {

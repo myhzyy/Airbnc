@@ -2,8 +2,31 @@ const request = require("supertest");
 const app = require("../../../app");
 const db = require("../../../db/connections/dbConnectionPool");
 
+const seed = require("../../db/connections/seed");
+const {
+  propertyTypesData,
+  usersData,
+  propertiesData,
+  reviewsData,
+  favouritesData,
+  imagesData,
+  bookingsData,
+} = require("../../db/data/test");
+
 afterAll(async () => {
   await db.end();
+});
+
+beforeEach(async () => {
+  await seed(
+    propertyTypesData,
+    usersData,
+    propertiesData,
+    reviewsData,
+    favouritesData,
+    imagesData,
+    bookingsData
+  );
 });
 
 describe("UsersID tests", () => {

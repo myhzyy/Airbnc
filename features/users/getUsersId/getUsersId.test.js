@@ -1,6 +1,6 @@
 const request = require("supertest");
 const app = require("../../../app");
-const db = require("../../../db/connections/dbConnectionPool");
+const db = require("../../db/connections/dbConnectionPool");
 
 const seed = require("../../db/connections/seed");
 const {
@@ -11,7 +11,7 @@ const {
   favouritesData,
   imagesData,
   bookingsData,
-} = require("../../db/data/test");
+} = require("../../../db/data/test");
 
 afterAll(async () => {
   await db.end();

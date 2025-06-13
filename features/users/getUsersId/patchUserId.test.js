@@ -11,7 +11,7 @@ const {
   favouritesData,
   imagesData,
   bookingsData,
-} = require("../../db/data/test");
+} = require("../../../db/data/test");
 
 afterAll(async () => {
   await db.end();

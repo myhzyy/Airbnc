@@ -1,8 +1,8 @@
 const request = require("supertest");
 const app = require("../../../app");
-const db = require("../../db/connections/dbConnectionPool");
+const db = require("../../../db/connections/dbConnectionPool");
 
-const seed = require("../../db/connections/seed");
+const seed = require("../../../db/connections/seed");
 const {
   propertyTypesData,
   usersData,

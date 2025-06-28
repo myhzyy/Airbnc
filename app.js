@@ -10,6 +10,10 @@ const {
 } = require("./features/properties/controllers/getProperties.controller");
 
 const {
+  getPropertiesSortedByPrice,
+} = require("./features/propertiesFilter/controller/propertiesFilter.controller");
+
+const {
   getReviewsByPropertyId,
 } = require("./features/propertiesReviews/controllers/propertiesReviews.controller");
 
@@ -63,6 +67,8 @@ app.get("/api/amenities", getAmenities); /// DONE ✅
 app.delete("/api/reviews/:id", deleteReview); /// DONE ✅
 
 app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite); /// DONE ✅
+app.get("/api/properties/sort/price-low-high", getPropertiesSortedByPrice);
+
 app.all("*invalid-path", handlePathNotFound);
 
 app.use((err, req, res, next) => {

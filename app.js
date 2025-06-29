@@ -10,8 +10,12 @@ const {
 } = require("./features/properties/controllers/getProperties.controller");
 
 const {
-  getPropertiesSortedByPrice,
-} = require("./features/propertiesFilter/controller/propertiesFilter.controller");
+  getPropertiesSortedByPriceLowToHigh,
+} = require("./features/propertiesFilter/controller/propertiesFilterLowToHigh.controller");
+
+const {
+  getPropertiesSortedByPriceHighToLow,
+} = require("./features/propertiesFilter/controller/propertiesFilterHighToLow.controller");
 
 const {
   getReviewsByPropertyId,
@@ -66,7 +70,16 @@ app.get("/api/properties/:id/bookings", getBookings); /// DONE ✅
 app.get("/api/amenities", getAmenities); /// DONE ✅
 app.delete("/api/reviews/:id", deleteReview); /// DONE ✅
 app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite); /// DONE ✅
-app.get("/api/properties/sort/price-low-high", getPropertiesSortedByPrice);
+
+app.get(
+  "/api/properties/sort/price-low-high",
+  getPropertiesSortedByPriceLowToHigh
+); /// DONE ✅
+
+app.get(
+  "/api/properties/sort/price-high-low",
+  getPropertiesSortedByPriceHighToLow
+); /// DONE ✅
 
 app.all("*invalid-path", handlePathNotFound);
 

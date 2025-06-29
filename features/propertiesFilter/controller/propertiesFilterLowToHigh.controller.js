@@ -4,9 +4,9 @@ const {
 
 const {
   fetchPropertiesSortedByPrice,
-} = require("../model/propertiesFilter.model");
+} = require("../model/propertiesFilterLowToHigh.model");
 
-exports.getPropertiesSortedByPrice = async (req, res, next) => {
+exports.getPropertiesSortedByPriceLowToHigh = async (req, res, next) => {
   try {
     const properties = await fetchPropertiesSortedByPrice();
     res.status(200).send({ properties });

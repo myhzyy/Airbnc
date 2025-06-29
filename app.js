@@ -65,7 +65,6 @@ app.post("/api/properties/:id/favourite", postFavourite); /// DONE ✅
 app.get("/api/properties/:id/bookings", getBookings); /// DONE ✅
 app.get("/api/amenities", getAmenities); /// DONE ✅
 app.delete("/api/reviews/:id", deleteReview); /// DONE ✅
-
 app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite); /// DONE ✅
 app.get("/api/properties/sort/price-low-high", getPropertiesSortedByPrice);
 

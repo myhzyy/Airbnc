@@ -25,4 +25,7 @@ module.exports = {
 
   // Bookings
   ...require("./createBookings.js"),
+
+  // Auth Users
+  ...require("./createAuthUsersTable"),
 };

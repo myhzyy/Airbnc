@@ -9,6 +9,9 @@ const {
   getProperties,
 } = require("./features/properties/controllers/getProperties.controller");
 
+const { signup } = require("./features/auth/controller/auth.controller");
+const { login } = require("./features/auth/controller/login.controller");
+
 const {
   getPropertiesSortedByPriceLowToHigh,
 } = require("./features/propertiesFilter/controller/propertiesFilterLowToHigh.controller");
@@ -80,6 +83,9 @@ app.get(
   "/api/properties/sort/price-high-low",
   getPropertiesSortedByPriceHighToLow
 ); /// DONE ✅
+
+app.post("/api/auth/signup", signup);
+app.post("/api/auth/login", login);
 
 app.all("*invalid-path", handlePathNotFound);
 

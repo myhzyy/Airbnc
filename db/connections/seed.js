@@ -19,6 +19,8 @@ const {
   insertPropertiesAmenities,
   createBookingsTable,
   insertBookingsTable,
+  createAuthUsersTable,
+  insertAuthUsers,
 } = require("../queries");
 
 const dropTables = require("../utils/dropTables");
@@ -30,11 +32,15 @@ async function seed(
   reviewsData,
   favouritesData,
   imagesData,
-  bookingsData
+  bookingsData,
+  authUsersData
 ) {
   ///  DROP ALL TABLES TABLES
 
   await dropTables();
+
+  await createAuthUsersTable();
+  await insertAuthUsers(authUsersData);
 
   ///  PROPERTYTYPES TABLE
 

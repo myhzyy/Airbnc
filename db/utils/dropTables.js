@@ -2,6 +2,7 @@ const db = require("../connections/dbConnectionPool");
 
 async function dropTables() {
   const tables = [
+    "auth_users",
     "properties_amenities",
     "bookings",
     "favourites",

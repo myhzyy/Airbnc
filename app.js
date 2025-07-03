@@ -6,6 +6,11 @@ app.use(cors());
 app.use(express.json());
 
 // Properties
+
+const {
+  postBooking,
+} = require("./features/bookings/controller/postBookings.controller");
+
 const {
   getProperties,
 } = require("./features/properties/controllers/getProperties.controller");
@@ -93,6 +98,7 @@ app.patch("/api/users/:id", patchUserId);
 
 app.post("/api/auth/signup", signup);
 app.post("/api/auth/login", login);
+app.post("/api/properties/:id/bookings", postBooking);
 
 app.delete("/api/reviews/:id", deleteReview);
 

@@ -8,10 +8,6 @@ app.use(express.json());
 // Properties
 
 const {
-  postBooking,
-} = require("./features/bookings/controller/postBookings.controller");
-
-const {
   getProperties,
 } = require("./features/properties/controllers/getProperties.controller");
 const {
@@ -60,6 +56,14 @@ const {
   getBookings,
 } = require("./features/bookings/controller/bookings.controller");
 
+const {
+  getBookingsByUserId,
+} = require("./features/bookings/controller/getBookingsByUserId.controller");
+
+const {
+  postBooking,
+} = require("./features/bookings/controller/postBookings.controller");
+
 // Amenities
 const {
   getAmenities,
@@ -77,6 +81,7 @@ app.get("/api/properties/:id", getPropertyId);
 app.get("/api/properties/:id/reviews", getReviewsByPropertyId);
 app.get("/api/properties/:id/amenities", getAmenitiesByPropertyId);
 app.get("/api/properties/:id/bookings", getBookings);
+app.get("/api/users/:user_id/bookings", getBookingsByUserId);
 
 app.post("/api/properties/:id/reviews", postReviews);
 app.post("/api/properties/:id/favourite", postFavourite);

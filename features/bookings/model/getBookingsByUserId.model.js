@@ -1,4 +1,3 @@
-const { ro } = require("date-fns/locale");
 const db = require("../../../db/connections/dbConnectionPool");
 
 exports.getBookingsByUserId = async (user_id) => {

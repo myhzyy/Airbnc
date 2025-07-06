@@ -39,6 +39,10 @@ const {
   patchUserId,
 } = require("./features/users/getUsersId/controller/patchUserId.controller");
 
+const {
+  getUserStatsController,
+} = require("./features/users/getUsersId/controller/getUserStats.controller");
+
 // Auth
 const { signup } = require("./features/auth/controller/auth.controller");
 const { login } = require("./features/auth/controller/login.controller");
@@ -95,6 +99,8 @@ app.get(
   "/api/properties/sort/price-high-low",
   getPropertiesSortedByPriceHighToLow
 );
+
+app.get("/api/users/:id/stats", getUserStatsController);
 
 app.get("/api/amenities", getAmenities);
 

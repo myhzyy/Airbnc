@@ -68,6 +68,10 @@ const {
   postBooking,
 } = require("./features/bookings/controller/postBookings.controller");
 
+const {
+  deleteBooking,
+} = require("./features/bookings/controller/deleteBooking.controller");
+
 // Amenities
 const {
   getAmenities,
@@ -89,7 +93,6 @@ app.get("/api/users/:user_id/bookings", getBookingsByUserId);
 
 app.post("/api/properties/:id/reviews", postReviews);
 app.post("/api/properties/:id/favourite", postFavourite);
-app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite);
 
 app.get(
   "/api/properties/sort/price-low-high",
@@ -111,7 +114,9 @@ app.post("/api/auth/signup", signup);
 app.post("/api/auth/login", login);
 app.post("/api/properties/:id/bookings", postBooking);
 
+app.delete("/api/properties/:id/users/:user_id/favourite", deleteFavourite);
 app.delete("/api/reviews/:id", deleteReview);
+app.delete("/api/bookings/:booking_id", deleteBooking);
 
 // Fallback & Error Handling
 app.all("*invalid-path", handlePathNotFound);

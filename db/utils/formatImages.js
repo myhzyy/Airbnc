@@ -6,10 +6,19 @@ function formatImages(imagesData, propertiesDbDataRows) {
     propertyIdMap[propertyName] = property.property_id;
   });
 
-  return (formattedImages = imagesData.map((image) => {
+  const formattedImages = [];
+
+  imagesData.forEach((image) => {
     const propertyId = propertyIdMap[image.property_name];
-    return [propertyId, image.image_url, image.alt_tag];
-  }));
+
+    if (propertyId) {
+      formattedImages.push([propertyId, image.image_url, image.alt_tag]);
+    } else {
+      console.warn("⚠️ Skipping image with missing property_id:", image);
+    }
+  });
+
+  return formattedImages;
 }
 
 module.exports = formatImages;

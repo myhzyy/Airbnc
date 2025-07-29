@@ -1,33 +1,46 @@
 function formatBookings(
-  propertiesTableResrows,
-  usersTableResrows,
+  propertiesTableResRows,
+  usersTableResRows,
   bookingsData
 ) {
   const propertiesLookUpMap = {};
   const usersLookUpMap = {};
 
-  const propertiesLookUpList = propertiesTableResrows.map((properties) => {
-    const propertyName = properties.name;
-    const propertyId = properties.property_id;
-    propertiesLookUpMap[propertyName] = propertyId;
+  propertiesTableResRows.forEach((property) => {
+    propertiesLookUpMap[property.name] = property.property_id;
   });
 
-  const usersLookUpList = usersTableResrows.map((users) => {
-    const userName = `${users.first_name} ${users.surname}`;
-    const userId = users.user_id;
-    usersLookUpMap[userName] = userId;
+  usersTableResRows.forEach((user) => {
+    const userName = `${user.first_name} ${user.surname}`;
+    usersLookUpMap[userName] = user.user_id;
   });
 
-  return (formattedBookings = bookingsData.map(
+  const formattedBookings = [];
+
+  bookingsData.forEach(
     ({ property_name, guest_name, check_in_date, check_out_date }) => {
-      return [
-        propertiesLookUpMap[property_name],
-        usersLookUpMap[guest_name],
-        check_in_date,
-        check_out_date,
-      ];
+      const propertyId = propertiesLookUpMap[property_name];
+      const guestId = usersLookUpMap[guest_name];
+
+      if (propertyId && guestId) {
+        formattedBookings.push([
+          propertyId,
+          guestId,
+          check_in_date,
+          check_out_date,
+        ]);
+      } else {
+        console.warn("⚠️ Skipping booking with missing data:", {
+          property_name,
+          guest_name,
+          check_in_date,
+          check_out_date,
+        });
+      }
     }
-  ));
+  );
+
+  return formattedBookings;
 }
 
 module.exports = formatBookings;

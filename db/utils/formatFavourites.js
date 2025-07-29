@@ -16,12 +16,20 @@ function formatFavourites(
     propertyIdMap[propertyName] = property.property_id;
   });
 
-  return (formattedFavourites = favouritesData.map((favourites) => {
-    const guest_id = userIDMap[favourites.guest_name];
-    const property_id = propertyIdMap[favourites.property_name];
+  const formattedFavourites = [];
 
-    return [guest_id, property_id];
-  }));
+  favouritesData.forEach((favourite) => {
+    const guest_id = userIDMap[favourite.guest_name];
+    const property_id = propertyIdMap[favourite.property_name];
+
+    if (guest_id && property_id) {
+      formattedFavourites.push([guest_id, property_id]);
+    } else {
+      console.warn("⚠️ Skipping favourite with missing data:", favourite);
+    }
+  });
+
+  return formattedFavourites;
 }
 
 module.exports = formatFavourites;

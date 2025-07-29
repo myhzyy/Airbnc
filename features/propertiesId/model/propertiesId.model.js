@@ -8,6 +8,8 @@ exports.fetchPropertyId = async (property_id, user_id) => {
       properties.location,
       properties.price_per_night,
       properties.description,
+      properties.latitude,
+      properties.longitude,
       users.user_id AS host,
       users.avatar AS host_avatar,
       COUNT(favourites.favourite_id) AS favourite_count
@@ -23,8 +25,10 @@ exports.fetchPropertyId = async (property_id, user_id) => {
 
   const imgRes = await db.query(
     `
-  SELECT image_url FROM images WHERE property_id = $1 
-  ORDER BY image_id ASC`,
+    SELECT image_url FROM images 
+    WHERE property_id = $1 
+    ORDER BY image_id ASC
+    `,
     [property_id]
   );
 
@@ -43,5 +47,8 @@ exports.fetchPropertyId = async (property_id, user_id) => {
     };
   }
 
-  return { ...propertyData, images: imageUrls };
+  return {
+    ...propertyData,
+    images: imageUrls,
+  };
 };

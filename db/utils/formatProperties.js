@@ -16,6 +16,8 @@ function formatProperties(propertiesData, usersData) {
       property.property_type,
       property.price_per_night,
       property.description,
+      property.latitude,
+      property.longitude,
     ];
 
     return result;

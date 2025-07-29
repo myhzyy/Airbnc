@@ -1,6 +1,8 @@
 const format = require("pg-format");
 const db = require("../../../db/connections/dbConnectionPool");
 
+const ENV = process.env.NODE_ENV || "production";
+
 exports.fetchProperties = async (queryParams) => {
   const { maxprice, minprice, sort, order, host, amenity } = queryParams;
 
@@ -32,6 +34,7 @@ exports.fetchProperties = async (queryParams) => {
       properties.name AS property_name,
       properties.location,
       properties.price_per_night,
+      ${ENV === "dev" ? "properties.latitude, properties.longitude," : ""}
       CONCAT(users.first_name, ' ', users.surname) AS host,
       COUNT(favourites.favourite_id) AS favourite_count,
       img.image_url AS image
@@ -61,6 +64,7 @@ exports.fetchProperties = async (queryParams) => {
         : " WHERE properties.price_per_night <= %L",
       maxprice
     );
+    whereAdded = true;
   }
 
   if (host) {

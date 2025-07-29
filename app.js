@@ -130,6 +130,7 @@ app.use((err, req, res, next) => {
 
 // Start Server
 if (require.main === module) {
+  console.log("ENV is:", process.env.NODE_ENV); // ✅ Add this
   app.listen(9090, () => {
     console.log("Server listening on port 9090");
   });

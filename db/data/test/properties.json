@@ -6,7 +6,9 @@
     "price_per_night": 120.0,
     "description": "Description of Modern Apartment in City Center.",
     "host_name": "Alice Johnson",
-    "amenities": ["WiFi", "TV", "Kitchen"]
+    "amenities": ["WiFi", "TV", "Kitchen"],
+    "latitude": 51.509865,
+    "longitude": -0.118092
   },
   {
     "name": "Cosy Family House",
@@ -15,7 +17,9 @@
     "price_per_night": 150.0,
     "description": "Description of Cosy Family House.",
     "host_name": "Alice Johnson",
-    "amenities": ["WiFi", "Parking", "Kitchen"]
+    "amenities": ["WiFi", "Parking", "Kitchen"],
+    "latitude": 53.48095,
+    "longitude": -2.23743
   },
   {
     "name": "Chic Studio Near the Beach",
@@ -24,7 +28,9 @@
     "price_per_night": 90.0,
     "description": "Description of Chic Studio Near the Beach.",
     "host_name": "Alice Johnson",
-    "amenities": ["WiFi"]
+    "amenities": ["WiFi"],
+    "latitude": 50.827778,
+    "longitude": -0.152778
   },
   {
     "name": "Elegant City Apartment",
@@ -33,7 +39,9 @@
     "price_per_night": 110.0,
     "description": "Description of Elegant City Apartment.",
     "host_name": "Emma Davis",
-    "amenities": ["TV", "Kitchen", "Washer"]
+    "amenities": ["TV", "Kitchen", "Washer"],
+    "latitude": 52.489471,
+    "longitude": -1.898575
   },
   {
     "name": "Charming Studio Retreat",
@@ -42,7 +50,9 @@
     "price_per_night": 85.0,
     "description": "Description of Charming Studio Retreat.",
     "host_name": "Emma Davis",
-    "amenities": ["WiFi", "TV"]
+    "amenities": ["WiFi", "TV"],
+    "latitude": 51.454514,
+    "longitude": -2.58791
   },
   {
     "name": "Luxury Penthouse with View",
@@ -51,7 +61,9 @@
     "price_per_night": 250.0,
     "description": "Description of Luxury Penthouse with View.",
     "host_name": "Alice Johnson",
-    "amenities": ["WiFi", "Parking", "TV"]
+    "amenities": ["WiFi", "Parking", "TV"],
+    "latitude": 51.509865,
+    "longitude": -0.118092
   },
   {
     "name": "Spacious Countryside House",
@@ -60,7 +72,9 @@
     "price_per_night": 200.0,
     "description": "Description of Spacious Countryside House.",
     "host_name": "Isabella Martinez",
-    "amenities": ["Washer", "Parking", "Kitchen"]
+    "amenities": ["Washer", "Parking", "Kitchen"],
+    "latitude": 53.958332,
+    "longitude": -1.080278
   },
   {
     "name": "Seaside Studio Getaway",
@@ -69,7 +83,9 @@
     "price_per_night": 95.0,
     "description": "Description of Seaside Studio Getaway.",
     "host_name": "Emma Davis",
-    "amenities": ["WiFi"]
+    "amenities": ["WiFi"],
+    "latitude": 50.266043,
+    "longitude": -5.05271
   },
   {
     "name": "Cosy Loft in the Heart of the City",
@@ -78,7 +94,9 @@
     "price_per_night": 130.0,
     "description": "Description of Cosy Loft in the Heart of the City.",
     "host_name": "Isabella Martinez",
-    "amenities": ["WiFi", "Kitchen", "TV"]
+    "amenities": ["WiFi", "Kitchen", "TV"],
+    "latitude": 53.48095,
+    "longitude": -2.23743
   },
   {
     "name": "Quaint Cottage in the Hills",
@@ -87,7 +105,9 @@
     "price_per_night": 180.0,
     "description": "Description of Quaint Cottage in the Hills.",
     "host_name": "Isabella Martinez",
-    "amenities": ["Washer", "Parking", "WiFi"]
+    "amenities": ["Washer", "Parking", "WiFi"],
+    "latitude": 54.4609,
+    "longitude": -3.0886
   },
   {
     "name": "Bright and Airy Studio",
@@ -96,6 +116,8 @@
     "price_per_night": 100.0,
     "description": "Description of Bright and Airy Studio.",
     "host_name": "Alice Johnson",
-    "amenities": ["WiFi", "TV"]
+    "amenities": ["WiFi", "TV"],
+    "latitude": 52.205338,
+    "longitude": 0.121817
   }
 ]

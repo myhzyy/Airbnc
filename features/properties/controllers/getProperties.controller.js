@@ -5,9 +5,10 @@ const {
 
 exports.getProperties = async (req, res, next) => {
   try {
-    const properties = await fetchProperties(req.query);
-    res.status(200).send({ properties });
+    const result = await db.query("SELECT * FROM properties");
+    res.json(result.rows);
   } catch (err) {
+    console.error("❌ Error in getProperties:", err);
     next(err);
   }
 };

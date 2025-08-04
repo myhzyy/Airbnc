@@ -7,10 +7,6 @@ app.use(express.json());
 
 // Properties
 
-app.get("/api/test", (req, res) => {
-  res.send("✅ Backend is working");
-});
-
 const {
   getProperties,
 } = require("./features/properties/controllers/getProperties.controller");

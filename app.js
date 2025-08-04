@@ -11,6 +11,10 @@ app.get("/api/test", (req, res) => {
   res.send("✅ Backend is working");
 });
 
+app.get("/", (req, res) => {
+  res.send("🌍 Welcome to the AirBNC backend API. Use /api/* routes.");
+});
+
 const {
   getProperties,
 } = require("./features/properties/controllers/getProperties.controller");

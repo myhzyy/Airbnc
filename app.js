@@ -23,6 +23,10 @@ const {
   getPropertiesSortedByPriceHighToLow,
 } = require("./features/propertiesFilter/controller/propertiesFilterHighToLow.controller");
 
+const {
+  getPropertyImages,
+} = require("./features/propertiesImages/controller/propertiesImages.controller");
+
 // Reviews
 const {
   getReviewsByPropertyId,
@@ -104,10 +108,11 @@ app.get(
 );
 
 app.get("/api/users/:id/stats", getUserStatsController);
-
 app.get("/api/amenities", getAmenities);
-
 app.get("/api/users/:id", getUsersId);
+
+app.get("/api/properties/:id/images", getPropertyImages);
+
 app.patch("/api/users/:id", patchUserId);
 
 app.post("/api/auth/signup", signup);
